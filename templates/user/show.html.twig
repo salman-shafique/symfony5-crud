@@ -1,0 +1,113 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User{% endblock %}
+
+{% block body %}
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>User Detail</h1>
+                </div>
+                <div class="col-sm-6">
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <section class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-default">
+                    <div class="card-header">
+                        <h3 class="card-title">User Detail</h3>
+
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-sm-10">
+                                <p class="text-muted"><b>First Name: </b>{{ user.FirstName }}</p>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-10">
+                                <p class="text-muted"><b>Last Name: </b>{{ user.LastName }}</p>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-10">
+                                <p class="text-muted"><b>Email: </b>{{ user.email }}</p>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-10">
+                                <p class="text-muted"><b>Username: </b>{{ user.UName }}</p>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-10">
+                                <p class="text-muted"><b>DOB: </b>{{ user.dob| date("Y-m-d") }}</p>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-10">
+                                <p class="text-muted"><b>Created At: </b>{{ user.createdAt| date("Y-m-d H:i:s") }}</p>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-10">
+                                <p class="text-muted"><b>Updated At: </b>{{ user.updatedAt| date("Y-m-d  H:i:s") }}</p>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-10">
+                                <p class="text-muted"><b>Phone Numbers: </b></p>
+                                {% for phone in phone_numbers %}
+                                    <p class="text-muted">{{ phone.phoneNo }}</p>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <hr class="mt-2 mb-3"/>
+                        <h5 class="mb-3">Addresses</h5>
+                        <div class="addresses-container mb-5" data-address="1">
+                            <div class="row g-3 address-row mb-2">
+                                {% for address in addresses %}
+                                    <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column">
+                                        <div class="card bg-light d-flex flex-fill">
+                                            <div class="card-body pt-0">
+                                                <div class="row">
+                                                    <div class="col pt-3">
+                                                        <p class="text-muted"><b>Street: </b>{{ address.street }}</p>
+                                                        <p class="text-muted"><b>Zip: </b>{{ address.zip }}</p>
+                                                        <p class="text-muted"><b>City: </b>{{ address.city }}</p>
+                                                        <p class="text-muted"><b>Country: </b>{{ address.country }}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col mt-5">
+                                <a href="{{ path('user_index') }}" class="btn btn-warning  float-right">Back</a>
+                                <a href="{{ path('user_edit',{id:user.id}) }}" class="btn btn-primary  float-right mr-2">Edit</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+
+    </section>
+
+{% endblock %}

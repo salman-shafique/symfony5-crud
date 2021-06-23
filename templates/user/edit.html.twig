@@ -1,0 +1,163 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New User{% endblock %}
+
+{% block body %}
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Edit User</h1>
+                </div>
+                <div class="col-sm-6">
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    {% include 'partials/alerts.html.twig' %}
+    <section class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-default">
+                    <div class="card-header">
+                        <h3 class="card-title">Edit User</h3>
+
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <form name="user" method="post">
+                            <input type="hidden" name="token" value="{{ csrf_token('user') }}"/>
+                            <div class="row mb-3">
+                                <label for="first_name" class="col-sm-2 col-form-label">First Name</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="first_name" class="form-control col-md-6" id="first_name"
+                                           placeholder="First Name" value="{{ user.FirstName }}" required>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="last_name" class="col-sm-2 col-form-label">Last Name</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="last_name" class="form-control col-md-6" id="last_name"
+                                           placeholder="Last Name" value="{{ user.LastName }}" required>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="email" class="col-sm-2 col-form-label">Email</label>
+                                <div class="col-sm-10">
+                                    <input type="email" name="email" value="{{ user.email }}"
+                                           class="form-control col-md-6" id="email"
+                                           placeholder="Email"
+                                           required>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="password" class="col-sm-2 col-form-label">Password</label>
+                                <div class="col-sm-10">
+                                    <input type="password" name="password" class="form-control col-md-6" id="password"
+                                           placeholder="password">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="password" class="col-sm-2 col-form-label">Roles</label>
+                                <div class="col-sm-10">
+                                    <select name="roles" class="form-control col-md-6" id="" required>
+                                        {% if "ROLE_ADMIN" in user.roles %}
+                                            <option value="ROLE_ADMIN" selected>Admin</option>
+                                            <option value="ROLE_USER">User</option>
+                                        {% elseif "ROLE_USER" in user.roles %}
+                                            <option value="ROLE_ADMIN">Admin</option>
+                                            <option value="ROLE_USER" selected>User</option>
+                                        {% endif %}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="dob" class="col-sm-2 col-form-label">Data of birth</label>
+                                <div class="col-sm-10">
+                                    <input type="date" name="dob" value="{{ user.dob| date("Y-m-d") }}"
+                                           class="form-control col-md-6" id="dob" required>
+                                </div>
+                            </div>
+                            <hr class="mt-2 mb-3"/>
+                            <h4 class="mb-3">Addresses
+                                <button type="button" class="btn btn-success float-right add-address-btn">Add</button>
+                            </h4>
+                            <div class="addresses-container mb-5" data-address="1">
+                                {% for address in addresses %}
+                                    <div class="row g-3 address-row mb-2">
+                                        <div class="col">
+                                            <input type="text" class="form-control street"
+                                                   placeholder="Street" value="{{ address.street }}" required>
+                                        </div>
+                                        <div class="col">
+                                            <input type="number" class="form-control zip"
+                                                   placeholder="Zip" value="{{ address.zip }}" required>
+                                        </div>
+                                        <div class="col">
+                                            <input type="text" class="form-control city"
+                                                   placeholder="City" value="{{ address.city }}" required>
+                                        </div>
+                                        <div class="col">
+                                            <input type="text" class="form-control country"
+                                                   placeholder="Country" value="{{ address.country }}" required>
+                                        </div>
+                                        <div class="col">
+                                            <button type="button"
+                                                    data-edit-url="{{ path('address_edit',{id: address.id}) }}"
+                                                    class="btn btn-info update-address-btn">update
+                                            </button>
+                                            <button type="button"
+                                                    data-delete-url="{{ path('address_delete',{id: address.id}) }}"
+                                                    class="btn btn-danger delete-address-btn">Delete
+                                            </button>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+
+                            <hr class="mt-2 mb-3"/>
+                            <h4 class="mb-3">Phone Numbers
+                                <button type="button" class="btn btn-success float-right add-phone-btn">Add</button>
+                            </h4>
+                            <div class="phone-container" data-phone="1">
+                                {% for phone in phone_numbers %}
+
+                                    <div class="row g-3 phone-row mb-2">
+                                        <div class="col">
+                                            <input type="text" class="form-control phone_no"
+                                                   placeholder="Phone Number" value="{{ phone.phoneNo }}" required>
+                                        </div>
+                                        <div class="col">
+                                            <button type="button"
+                                                    data-edit-url="{{ path('phone_edit',{id: phone.id}) }}"
+                                                    class="btn btn-info update-phone-btn">update
+                                            </button>
+                                            <button type="button"
+                                                    data-delete-url="{{ path('phone_delete',{id: phone.id}) }}"
+                                                    class="btn btn-danger delete-phone-btn">Delete
+                                            </button>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+
+                            </div>
+                            <div class="row">
+                                <div class="col mt-5">
+                                    <a href="{{ path('user_index') }}" class="btn btn-warning  float-right">Cancel</a>
+                                    <button type="submit" class="btn btn-primary  float-right mr-2">Update</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

@@ -1,0 +1,137 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New User{% endblock %}
+
+{% block body %}
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Create User</h1>
+                </div>
+                <div class="col-sm-6">
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    {% include 'partials/alerts.html.twig' %}
+    <section class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-default">
+                    <div class="card-header">
+                        <h3 class="card-title">Create User</h3>
+
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <form name="user" method="post">
+                            <input type="hidden" name="token" value="{{ csrf_token('user') }}"/>
+                            <div class="row mb-3">
+                                <label for="first_name" class="col-sm-2 col-form-label">First Name</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="first_name" class="form-control col-md-6" id="first_name"
+                                           placeholder="First Name" required>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="last_name" class="col-sm-2 col-form-label">Last Name</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="last_name" class="form-control col-md-6" id="last_name"
+                                           placeholder="Last Name" required>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="email" class="col-sm-2 col-form-label">Email</label>
+                                <div class="col-sm-10">
+                                    <input type="email" name="email" class="form-control col-md-6" id="email"
+                                           placeholder="Email"
+                                           required>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="password" class="col-sm-2 col-form-label">Password</label>
+                                <div class="col-sm-10">
+                                    <input type="password" name="password" class="form-control col-md-6" id="password"
+                                           placeholder="password">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="password" class="col-sm-2 col-form-label">Roles</label>
+                                <div class="col-sm-10">
+                                    <select name="roles" class="form-control col-md-6" id="" required>
+                                        <option value="ROLE_ADMIN" selected>Admin</option>
+                                        <option value="ROLE_USER">User</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="dob" class="col-sm-2 col-form-label">Data of birth</label>
+                                <div class="col-sm-10">
+                                    <input type="date" name="dob" class="form-control col-md-6" id="dob" required>
+                                </div>
+                            </div>
+                            <hr class="mt-2 mb-3"/>
+                            <h4 class="mb-3">Addresses
+                                <button type="button" class="btn btn-success float-right add-address-btn">Add</button>
+                            </h4>
+                            <div class="addresses-container mb-5" data-address="1">
+                                <div class="row g-3 address-row mb-2">
+                                    <div class="col">
+                                        <input type="text" name="address[0][street]" class="form-control"
+                                               placeholder="Street" required>
+                                    </div>
+                                    <div class="col">
+                                        <input type="number" name="address[0][zip]" class="form-control"
+                                               placeholder="Zip" required>
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" name="address[0][city]" class="form-control"
+                                               placeholder="City" required>
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" name="address[0][country]" class="form-control"
+                                               placeholder="County" required>
+                                    </div>
+                                    <div class="col">
+                                        <button type="button" class="btn btn-danger delete-address-btn">Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr class="mt-2 mb-3"/>
+                            <h4 class="mb-3">Phone Numbers
+                                <button type="button" class="btn btn-success float-right add-phone-btn">Add</button>
+                            </h4>
+                            <div class="phone-container" data-phone="1">
+                                <div class="row g-3 phone-row mb-2">
+                                    <div class="col">
+                                        <input type="text" name="phone[0][number]" class="form-control"
+                                               placeholder="Phone Number" required>
+                                    </div>
+                                    <div class="col">
+                                        <button type="button" class="btn btn-danger delete-phone-btn">Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col mt-5">
+                                    <button type="submit" class="btn btn-primary  float-right">Create</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+    </section>
+
+
+    <a href="{{ path('user_index') }}">back to list</a>
+{% endblock %}
