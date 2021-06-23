@@ -4,7 +4,7 @@
 ### Running the code
 To run the app follow these steps:
 
-1. Running `git clone https://github.com/salman-shafique/symfony5-crud.git`
+1. Run `git clone https://github.com/salman-shafique/symfony5-crud.git` to clone the repo.
 2. Create a `.env` file within the root folder of the project or copy example env `cp .env.example .env`
 3. Run `docker-composer up --build` to spin up the MySQL container.
 4. Run `composer install` to install all the project's dependencies.
