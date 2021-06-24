@@ -14,4 +14,9 @@ To run the app follow these steps:
 8. Run `symfony console doctrine:fixtures:load` to run the admin seeder.
 9. Run `symfony server:start --no-tls` to run the server.
 
+### Demo Credentials
+
+**Email:** admin@admin.com  
+**Password:** admin123
+
 
